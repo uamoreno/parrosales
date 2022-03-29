@@ -6,7 +6,7 @@ management
 To install:
 
 1. Make sure ports 85 and 3306 are available in your system and not running any service on them
-2. Push or download the repository
+2. Clone or download the repository
 3. Run the following commands in your command line
 
 ```
