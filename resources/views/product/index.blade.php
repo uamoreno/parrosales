@@ -2,21 +2,34 @@
 @extends('product.layout')
 
 
+
 @section('content')
 <div class="container">
 
-    <div class="row ">
-        <div class="col-12">
+    @if(session()->has('errors'))
+        <div class="alert alert-danger">
+            <p><strong>We found a problem: </strong> {{ $errors }}</p>
+        </div>
+    @endif
+
+    @if(session()->has('success'))
+    <div class="alert alert-success">
+        <p><strong>Done: </strong> {{ session()->get('success') }}</p>
+    </div>
+    @endif
+
+    <div class="card">
+        <div class="card-body">
             <button role="link" onclick="location.href='/product/create'" class="btn btn-danger">New Product <i class="fa fa-plus"></i></button>
         </div>
     </div>
+    <br/>
 
+    <div class="card">
+    <div class="card-header">Results</div>
+      <div class="card-body">
 
-    <div class="row ">
-
-      <div class="col-12">
-
-        <table class="table align-items-center mb-0">
+        <table class="table table-striped align-items-center mb-0">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -25,6 +38,7 @@
                     <th>Price</th>
                     <th>Weight</th></tr>
             </thead>
+            <tbody>
             @foreach($list as $item)
             <tr>
                 <td>{{ $item->id }}</td>
@@ -44,7 +58,7 @@
                 </th>
             </tr>
             @endforeach
-
+            <tbody>
         </table>
 
 

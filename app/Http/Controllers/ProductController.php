@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $list=Product::latest()->paginate(20);
+        $list=Product::paginate(20);
         return view('product.index',compact('list'));
     }
 
@@ -106,7 +106,11 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $product->delete();
-        return redirect()->route('product.index');
+        try{
+            $product->delete();
+        }catch(\Exception $ex){
+            return redirect()->route('product.index')->with('errors',"Product {$product->name} already placed in orders");
+        }
+        return redirect()->route('product.index')->with('success',"Product {$product->name} deleted");
     }
 }

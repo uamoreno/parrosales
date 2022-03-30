@@ -5,19 +5,19 @@
 @section('content')
 <div class="container">
 
-    <div class="row ">
-        <div class="col-12">
+    <div class="card">
+        <div class="card-body">
             <button role="link" onclick="location.href='/order/create'" class="btn btn-danger">
                 Place Order <i class="fa fa-plus"></i></button>
         </div>
     </div>
+    <br>
 
+    <div class="card">
+        <div class="card-header">Results</div>
+      <div class="card-body">
 
-    <div class="row ">
-
-      <div class="col-12">
-
-        <table class="table align-items-center mb-0">
+        <table class="table table-striped align-items-center mb-0">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -27,6 +27,7 @@
                     <th>Date</th>
                     <th>Options</th>
             </thead>
+            <tbody>
             @foreach($list as $item)
             <tr>
                 <td>{{ $item->id }}</td>
@@ -47,7 +48,7 @@
                 </th>
             </tr>
             @endforeach
-
+            </tbody>
         </table>
 
 

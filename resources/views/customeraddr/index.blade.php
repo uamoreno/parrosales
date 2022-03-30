@@ -5,24 +5,20 @@
 @section('content')
 <div class="container">
 
-    <div class="row ">
-        <div class="col-12">
-            <h2>{{ $customer->name }} Addresses</h2>
-        </div>
-    </div>
 
-    <div class="row ">
-        <div class="col-12">
+    <div class="card ">
+        <div class="card-header"><h3>{{ $customer->name }} Addresses</h3></div>
+        <div class="card-body">
             <a href="{{ route('customeraddr.create',$customer) }}" class="btn btn-danger">
                 New Address <i class="fa fa-plus"></i></a>
         </div>
     </div>
+    <br>
 
-
-    <div class="row ">
-
-      <div class="col-12">
-        <table class="table align-items-center mb-0">
+    <div class="card">
+      <div class="card-header">Results</div>
+      <div class="card-body">
+        <table class="table table-striped align-items-center mb-0">
             <thead>
                 <tr>
                     <th>Street</th>
@@ -34,6 +30,7 @@
 
                 </tr>
             </thead>
+            <tbody>
             @foreach($list as $item)
             <tr>
                 <td>{{ $item->street }}</td>
@@ -53,7 +50,7 @@
                 </th>
             </tr>
             @endforeach
-
+            <tbody>
         </table>
 
 
@@ -61,14 +58,14 @@
       </div>
 
     </div>
-  </div>
 
-  <div class="row ">
-    <div class="col-12">
+    <div class="card-footer">
         <div class="text-center">
             <a href="{{ route('customer.index') }}" class="btn btn-danger">Back <i class="fa fa-arrow-left"></i></a>
         </div>
     </div>
-    </div>
+
+  </div>
+
 
 @endsection

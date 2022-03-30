@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\CustomerAddr;
+use Exception;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -15,7 +16,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers=Customer::latest()->paginate(5);
+        $customers=Customer::paginate(20);
         return view('customer.index',compact('customers'))->with('i', (request()->input('page', 1) - 1) * 5);;
     }
 
@@ -106,8 +107,14 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        $customer->delete();
-        return redirect()->route('customer.index');
+        try{
+            $customer->delete();
+        }catch(Exception $ex){
+            return redirect()->route('customer.index')->with('errors',"Customer {$customer->name} has orders and can not be deleted.");
+        }
+        return redirect()->route('customer.index')->with('success',"Customer {$customer->name} deleted.");
+
+
 
     }
 }
